@@ -1,0 +1,33 @@
+version: '2'
+
+services:
+  web:
+    image: srlapi
+    container_name: srl_api
+    hostname: api
+    build:
+      context: .
+      dockerfile: ./docker/nodejs-dev/Dockerfile
+    volumes:
+      - "./src:/app/src"
+    ports:
+      - '3000:3000'
+    networks:
+      api:
+  mysql:
+    image: 'mariadb:10.1'
+    container_name: mysql_api
+    hostname: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: srl_data
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: password
+    ports:
+      - '3306:3306'
+    networks:
+      api:
+
+networks:
+  api:
+    driver: bridge
