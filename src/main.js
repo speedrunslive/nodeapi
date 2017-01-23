@@ -1,10 +1,19 @@
-var express = require('express');
-var app = express();
+var restify = require('restify');
 
-app.get('/', function(req, res) {
-  res.send('Hello World!');
+var port = process.env.PORT || 3000;
+var server = restify.createServer({
+  name: 'SpeedRunsLive',
+  version: '0.0.0'
+});
+server.use(restify.acceptParser(server.acceptable));
+server.use(restify.queryParser());
+server.use(restify.bodyParser());
+
+server.get('/echo/:name', function(req, res, next) {
+  res.send(req.params);
+  return next();
 });
 
-app.listen(3000, function() {
-  console.log('Example app listening on port 3000!');
+server.listen(port, function() {
+  console.log('%s listening at %s', server.name, server.url);
 });

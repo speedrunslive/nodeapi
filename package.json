@@ -1,10 +1,9 @@
 {
   "name": "speedrunslive-api",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "SpeedRunsLive API",
-  "main": "main.js",
   "scripts": {
-    "start": "nodemon -L src/main.js"
+    "start": "nodemon -L ./src/main.js"
   },
   "repository": {
     "type": "git",
@@ -13,6 +12,6 @@
   "author": "rainbowism <sushi@rainbowism.com>",
   "license": "MIT",
   "devDependencies": {
-    "express": "^4.14.0"
+    "restify": "^4.3.0"
   }
 }

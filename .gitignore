@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Compiled source #
 ###################
 *.com
@@ -106,4 +105,3 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
->>>>>>> 0f60336a4cd47738acc2516ec5f2ea61afadfd14
