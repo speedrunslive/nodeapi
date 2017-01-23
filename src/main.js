@@ -13,7 +13,10 @@ server.get('/echo/:name', function(req, res, next) {
   res.send(req.params);
   return next();
 });
-
+server.get('/', function(req, res, next) {
+  res.send({'data':'hi'});
+  return next();
+});
 server.listen(port, function() {
   console.log('%s listening at %s', server.name, server.url);
 });
