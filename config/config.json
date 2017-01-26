@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "dev",
+    "password": "password",
+    "database": "srl_data",
+    "host": "mysql",
+    "dialect": "mysql"
+  },
+  "migrate": {
+    "username": "dev",
+    "password": "password",
+    "database": "srl_data",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

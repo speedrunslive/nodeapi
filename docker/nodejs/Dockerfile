@@ -1,10 +1,14 @@
 FROM node:7.4
 
-ADD ./src /src
-WORKDIR /src
+RUN mkdir -p /app/config
+COPY ./package.json /app
+COPY ./config/config.json /app/config
+WORKDIR /app
 
 RUN npm install
 
+ADD ./src /app/src
+
 EXPOSE 3000
 
-CMD ["node", "main.js"]
+CMD npm start

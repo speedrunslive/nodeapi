@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "description": "SpeedRunsLive API",
   "scripts": {
-    "start": "nodemon -L ./src/main.js"
+    "start": "node ./src/app.js",
+    "dev": "nodemon -L ./src/app.js"
   },
   "repository": {
     "type": "git",
@@ -11,7 +12,11 @@
   },
   "author": "rainbowism <sushi@rainbowism.com>",
   "license": "MIT",
-  "devDependencies": {
-    "restify": "^4.3.0"
+  "dependencies": {
+    "mysql": "^2.13.0",
+    "sequelize": "^3.30.0",
+    "sequelize-cli": "^2.5.1",
+    "restify": "^4.3.0",
+    "restify-errors": "^4.3.0"
   }
 }
