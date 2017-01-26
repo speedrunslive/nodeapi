@@ -1,3 +1,6 @@
+/*
+ *  Copyright (c) 2017 SpeedRunsLive, All rights reserved.
+ */
 'use strict';
 
 console.log(__dirname);
