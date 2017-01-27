@@ -6,34 +6,58 @@
 var constants = require('./constants');
 
 module.exports = function(sequelize, DataTypes) {
-  var Player = sequelize.define('Player', {
+  var Stream = sequelize.define('Stream', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    name: {
+    player_id: {
       allowNull: false,
+      references: {
+        model: 'Players',
+        key: 'id'
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
+      type: DataTypes.INTEGER
+    },
+    channel: {
+      allowNull: false,
+      primaryKey: true,
       type: DataTypes.STRING
     },
-    account_type: {
+    api: {
       allowNull: false,
-      type: DataTypes.ENUM(constants.ACCOUNT_TYPE_ARRAY),
-      defaultValue: 'Player'
+      primaryKey: true,
+      type: DataTypes.ENUM,
+      values: constants.STREAM_API_ARRAY
     },
-    twitter: {
+    whitelisted: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     },
-    youtube: {
+    blacklisted: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     },
-    country: {
+    visibility: {
       allowNull: false,
-      type: DataTypes.ENUM(constants.COUNTRY_ARRAY),
-      defaultValue: 'None'
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    warnings: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    last_warning: {
+      allowNull: false,
+      type: DataTypes.DATE,
+      defaultValue: sequelize.fn('NOW')
     },
     created_at: {
       allowNull: false,
@@ -47,27 +71,20 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: sequelize.fn('NOW')
     }
   }, {
-    instanceMethods: {
-      toJSON: function() {
-        var values = Object.assign({}, this.get());
-
-        delete values.account_type;
-        return values;
-      }
-    },
     classMethods: {
       associate: function(models) {
-        Player.hasOne(models.Stream, {
+        Stream.belongsTo(models.Player, {
           foreign_key: {
             allowNull: false,
             name: 'player_id',
           },
-          as: 'stream',
+          as: 'player',
           onDelete: 'CASCADE'
         });
-      }
+      },
+      API: constants.STREAM_API
     },
     underscored: true
   });
-  return Player;
+  return Stream;
 };

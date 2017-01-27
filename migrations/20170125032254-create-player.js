@@ -3,53 +3,55 @@
  */
 'use strict';
 
-console.log(__dirname);
 var constants = require('../src/models/constants');
 
 module.exports = {
-  up: function(queryInterface, Sequelize) {
+  up: function(queryInterface, sequelize) {
     return queryInterface.createTable('Players', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: sequelize.INTEGER
       },
       name: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: sequelize.STRING
       },
-      accountType: {
+      account_type: {
         allowNull: false,
-        type: Sequelize.ENUM(constants.ACCOUNT_TYPE_ARRAY),
+        type: sequelize.ENUM,
+        values: constants.ACCOUNT_TYPE_ARRAY,
         defaultValue: 'Player'
       },
       twitter: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: sequelize.STRING
       },
       youtube: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: sequelize.STRING
       },
       country: {
         allowNull: false,
-        type: Sequelize.ENUM(constants.COUNTRIES_ARRAY),
+        type: sequelize.ENUM,
+        values: constants.COUNTRY_ARRAY,
         defaultValue: 'None'
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW')
+        type: sequelize.DATE,
+        defaultValue: sequelize.fn('NOW')
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW')
+        type: sequelize.DATE,
+        defaultValue: sequelize.fn('NOW'),
+        onUpdate: sequelize.fn('NOW')
       }
     });
   },
-  down: function(queryInterface, Sequelize) {
+  down: function(queryInterface, sequelize) {
     return queryInterface.dropTable('Players');
   }
 };

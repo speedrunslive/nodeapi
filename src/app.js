@@ -19,6 +19,7 @@ server.use(restify.queryParser());
 server.use(restify.bodyParser());
 
 require('./routes/v1/players')(server);
+require('./routes/v1/streams')(server);
 
 server.listen(port, function() {
   console.log('%s listening at %s', server.name, server.url);

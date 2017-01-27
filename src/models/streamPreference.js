@@ -11,15 +11,9 @@ module.exports = function(sequelize, DataTypes) {
     value: DataTypes.STRING
   }, {
     classMethods: {
-      associate: function(models) {
-        StreamPreference.belongsTo(models.Player, {
-          onDelete: 'CASCADE',
-          foreignKey: {
-            allowNull: false
-          }
-        });
-      }
-    }
+      associate: function(models) {}
+    },
+    underscored: true
   });
   return StreamPreference;
 };

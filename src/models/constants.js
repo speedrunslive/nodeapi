@@ -4,13 +4,34 @@
 'use strict';
 
 module.exports = {
+  ACCOUNT_TYPE: {
+    ADMIN: 'Admin',
+    OP: 'Operator',
+    HALF_OP: 'Half-Operator',
+    VOICE: 'Voice',
+    PLAYER: 'Player'
+  },
   ACCOUNT_TYPE_ARRAY: [
     'Admin', 'Operator', 'Half-Operator', 'Voice', 'Player'
   ],
-  STREAM_PREFERENCE_ARRAY: [
+  STREAM_API: {
+    NONE: 'none',
+    TWITCH: 'twitch',
+    HITBOX: 'hitbox',
+    BEAM: 'beam'
+  },
+  STREAM_API_ARRAY: ['none', 'twitch', 'hitbox', 'beam'],
+  STREAM_PREF: {
+    PIN_STREAM: 'Pin Stream',
+    HIDE_STREAM: 'Hide Stream',
+    PIN_GAME: 'Pin Game',
+    HIDE_GAME: 'Hide Game',
+    IMPORT_STREAMS: 'Import Streams'
+  },
+  STREAM_PREF_ARRAY: [
     'Pin Stream', 'Hide Stream', 'Pin Game', 'Hide Game', 'Import Streams'
   ],
-  COUNTRIES_ARRAY: [
+  COUNTRY_ARRAY: [
     'None',
     'Afghanistan',
     'Albania',

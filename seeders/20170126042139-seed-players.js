@@ -4,47 +4,27 @@
 'use strict';
 
 module.exports = {
-  up: function(queryInterface, Sequelize) {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkInsert('Person', [{
-        name: 'John Doe',
-        isBetaMember: false
-      }], {});
-    */
-
+  up: function(queryInterface, sequelize) {
     return queryInterface.bulkInsert('Players', [{
       name: 'sushi',
-      accountType: 'Admin',
+      account_type: 'Player',
       twitter: 'sushi',
-      youtube: '',
       country: 'None',
     }, {
       name: 'Sluip',
-      accountType: 'Admin',
+      account_type: 'Admin',
       twitter: 'Sluip',
       youtube: '',
       country: 'None',
     }, {
       name: 'Jiano',
-      accountType: 'Admin',
+      account_type: 'Admin',
       twitter: 'Jiano',
       youtube: 'SunJiano',
       country: 'United States of America',
     }], {});
   },
-
-  down: function(queryInterface, Sequelize) {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('Person', null, {});
-    */
+  down: function(queryInterface, sequelize) {
     return queryInterface.bulkDelete('Players', null, {});
   }
 };
