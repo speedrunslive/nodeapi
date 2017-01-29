@@ -56,19 +56,15 @@ module.exports = function(sequelize, DataTypes) {
     },
     last_warning: {
       allowNull: false,
-      type: 'TIMESTAMP',
-      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+      type: 'TIMESTAMP'
     },
     created_at: {
       allowNull: false,
-      type: 'TIMESTAMP',
-      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+      type: 'TIMESTAMP'
     },
     updated_at: {
       allowNull: false,
-      type: 'TIMESTAMP',
-      defaultValue: sequelize.literal(
-        'CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
+      type: 'TIMESTAMP'
     }
   }, {
     charset: 'utf8mb4',

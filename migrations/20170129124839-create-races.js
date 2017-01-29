@@ -3,8 +3,6 @@
  */
 'use strict';
 
-var constants = require('../src/models/constants');
-
 module.exports = {
   up: function(queryInterface, sequelize) {
     return queryInterface.createTable('Races', {

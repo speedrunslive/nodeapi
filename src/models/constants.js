@@ -5,6 +5,25 @@
 
 var Enum = require('enum');
 
+var raceState = new Enum({
+  'OPEN': 1,
+  'CLOSED': 2,
+  'IN_PROGRESS': 3,
+  'COMPLETE': 4,
+  'OVER': 5
+}, {
+  ignoreCase: true
+});
+
+var entrantState = new Enum({
+  'READY': 9994,
+  'ENTERED': 9995,
+  'FORFEIT': 9998,
+  'DISQUALIFIED': 9999
+}, {
+  ignoreCase: true
+});
+
 var streamAPI = new Enum(['TWITCH', 'HITBOX', 'BEAM'], {
   ignoreCase: true
 });
@@ -255,6 +274,10 @@ var country = new Enum({
 });
 
 module.exports = {
+  RACE_STATE: raceState,
+  RACE_STATES: raceState.enums.map(function(it) {
+    return it.value;
+  }),
   STREAM_API: streamAPI,
   STREAM_APIS: streamAPI.enums.map(function(it) {
     return it.key;

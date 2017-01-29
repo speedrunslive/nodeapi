@@ -3,8 +3,6 @@
  */
 'use strict';
 
-var constants = require('../src/models/constants');
-
 module.exports = {
   up: function(queryInterface, sequelize) {
     return queryInterface.createTable('CurrentRaces', {
@@ -28,7 +26,7 @@ module.exports = {
       },
       time: {
         allowNull: false,
-        type: 'TIMESTAMP',
+        type: 'TIMESTAMP'
       },
       state: {
         allowNull: false,
