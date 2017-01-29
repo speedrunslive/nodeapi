@@ -17,10 +17,10 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       type: DataTypes.STRING
     },
-    account_type: {
+    permissions: {
       allowNull: false,
-      type: DataTypes.ENUM(constants.ACCOUNT_TYPE_ARRAY),
-      defaultValue: 'Player'
+      type: DataTypes.INTEGER,
+      defaultValue: 0
     },
     twitter: {
       allowNull: false,
@@ -32,8 +32,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     country: {
       allowNull: false,
-      type: DataTypes.ENUM(constants.COUNTRY_ARRAY),
-      defaultValue: 'None'
+      type: DataTypes.INTEGER,
+      defaultValue: 1
     },
     created_at: {
       allowNull: false,
@@ -50,8 +50,7 @@ module.exports = function(sequelize, DataTypes) {
     instanceMethods: {
       toJSON: function() {
         var values = Object.assign({}, this.get());
-
-        delete values.account_type;
+        delete values.permissions;
         return values;
       }
     },

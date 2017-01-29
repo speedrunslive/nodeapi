@@ -3,8 +3,9 @@
  */
 'use strict';
 
-var models = require('../../models');
-var errors = require('restify-errors');
+var constants = require('../../models/constants'),
+  models = require('../../models'),
+  errors = require('restify-errors');
 
 function playersGet(req, res, next) {
   models.Player.find({
@@ -18,7 +19,7 @@ function playersGet(req, res, next) {
       required: false
     }],
     attributes: {
-      exclude: ['account_type', 'created_at', 'updated_at']
+      exclude: ['permissions', 'created_at', 'updated_at']
     }
   }).then(function(player) {
     if (!player) {
@@ -26,14 +27,15 @@ function playersGet(req, res, next) {
         message: 'No player with name ' + req.params.name
       }));
     } else {
-      var formatted = player.get();
+      var formatted = player.toJSON();
       if (!formatted.stream) {
         formatted.api = '';
         formatted.channel = '';
       } else {
-        formatted.api = player.stream.api;
+        formatted.api = player.stream.api.toLowerCase();
         formatted.channel = player.stream.channel;
       }
+      formatted.country = constants.COUNTRY.get(formatted.country);
       delete formatted.stream;
       res.send(formatted);
     }

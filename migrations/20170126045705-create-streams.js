@@ -33,7 +33,7 @@ module.exports = {
         api: {
           allowNull: false,
           type: sequelize.ENUM,
-          values: constants.STREAM_API_ARRAY
+          values: constants.STREAM_APIS
         },
         whitelisted: {
           allowNull: false,
@@ -47,8 +47,8 @@ module.exports = {
         },
         visibility: {
           allowNull: false,
-          type: sequelize.INTEGER,
-          defaultValue: 0
+          type: 'TINYINT',
+          defaultValue: 2
         },
         warnings: {
           allowNull: false,

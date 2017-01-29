@@ -32,7 +32,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true,
       type: DataTypes.ENUM,
-      values: constants.STREAM_API_ARRAY
+      values: constants.STREAM_APIS
     },
     whitelisted: {
       allowNull: false,
@@ -47,7 +47,7 @@ module.exports = function(sequelize, DataTypes) {
     visibility: {
       allowNull: false,
       type: DataTypes.INTEGER,
-      defaultValue: 0
+      defaultValue: 2
     },
     warnings: {
       allowNull: false,

@@ -3,8 +3,6 @@
  */
 'use strict';
 
-var constants = require('../src/models/constants');
-
 module.exports = {
   up: function(queryInterface, sequelize) {
     return queryInterface.createTable('Players', {
@@ -18,11 +16,10 @@ module.exports = {
         allowNull: false,
         type: sequelize.STRING
       },
-      account_type: {
+      permissions: {
         allowNull: false,
-        type: sequelize.ENUM,
-        values: constants.ACCOUNT_TYPE_ARRAY,
-        defaultValue: 'Player'
+        type: sequelize.INTEGER,
+        defaultValue: 0
       },
       twitter: {
         allowNull: false,
@@ -34,9 +31,13 @@ module.exports = {
       },
       country: {
         allowNull: false,
-        type: sequelize.ENUM,
-        values: constants.COUNTRY_ARRAY,
-        defaultValue: 'None'
+        type: 'TINYINT',
+        defaultValue: 1
+      },
+      last_seen: {
+        allowNull: false,
+        type: sequelize.DATE,
+        defaultValue: sequelize.fn('NOW')
       },
       created_at: {
         allowNull: false,

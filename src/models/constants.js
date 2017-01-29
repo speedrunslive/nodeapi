@@ -3,480 +3,272 @@
  */
 'use strict';
 
+var Enum = require('enum');
+
+var streamAPI = new Enum(['TWITCH', 'HITBOX', 'BEAM'], {
+  ignoreCase: true
+});
+
+var streamVisibility = new Enum({
+  'ALWAYS': 0,
+  'NEVER': 1,
+  'AUTO': 2,
+  'RACING': 3
+}, {
+  ignoreCase: true
+});
+
+var streamPref = new Enum({
+  'PIN_STREAM': 0,
+  'HIDE_STREAM': 1,
+  'PIN_GAME': 2,
+  'HIDE_GAME': 3,
+  'IMPORT_FROM': 4
+}, {
+  ignoreCase: true
+});
+
+var country = new Enum({
+  'None': 1,
+  'Afghanistan': 2,
+  'Albania': 3,
+  'Algeria': 4,
+  'American Samoa': 5,
+  'Andorra': 6,
+  'Angola': 7,
+  'Anguilla': 8,
+  'Antigua and Barbuda': 9,
+  'Argentina': 10,
+  'Armenia': 11,
+  'Aruba': 12,
+  'Australia': 13,
+  'Austria': 14,
+  'Azerbaijan': 15,
+  'Bahamas': 16,
+  'Bahrain': 17,
+  'Bangladesh': 18,
+  'Barbados': 19,
+  'Belarus': 20,
+  'Belgium': 21,
+  'Belize': 22,
+  'Benin': 23,
+  'Bermuda': 24,
+  'Bhutan': 25,
+  'Bolivia': 26,
+  'Bosnia': 27,
+  'Botswana': 28,
+  'Brazil': 29,
+  'British Virgin Islands': 30,
+  'Brunei': 31,
+  'Bulgaria': 32,
+  'Burkina Faso': 33,
+  'Burundi': 34,
+  'Cambodia': 35,
+  'Cameroon': 36,
+  'Canada': 37,
+  'Cape Verde': 38,
+  'Cayman Islands': 39,
+  'Central African Republic': 40,
+  'Chad': 41,
+  'Chile': 42,
+  'China': 43,
+  'Christmas Island': 44,
+  'Colombia': 45,
+  'Comoros': 46,
+  'Cook Islands': 47,
+  'Costa Rica': 48,
+  'Croatia': 49,
+  'Cuba': 50,
+  'Cyprus': 51,
+  'Czech Republic': 52,
+  'Democratic Republic of the Congo': 53,
+  'Denmark': 54,
+  'Djibouti': 55,
+  'Dominica': 56,
+  'Dominican Republic': 57,
+  'Ecuador': 58,
+  'Egypt': 59,
+  'El Salvador': 60,
+  'Equatorial Guinea': 61,
+  'Eritrea': 62,
+  'Estonia': 63,
+  'Ethiopia': 64,
+  'Falkland Islands': 65,
+  'Faroe Islands': 66,
+  'Fiji': 67,
+  'Finland': 68,
+  'France': 69,
+  'French Polynesia': 70,
+  'Gabon': 71,
+  'Gambia': 72,
+  'Georgia': 73,
+  'Germany': 74,
+  'Ghana': 75,
+  'Gibraltar': 76,
+  'Greece': 77,
+  'Greenland': 78,
+  'Grenada': 79,
+  'Guam': 80,
+  'Guatemala': 81,
+  'Guinea': 82,
+  'Guinea Bissau': 83,
+  'Guyana': 84,
+  'Haiti': 85,
+  'Honduras': 86,
+  'Hong Kong': 87,
+  'Hungary': 88,
+  'Iceland': 89,
+  'India': 90,
+  'Indonesia': 91,
+  'Iran': 92,
+  'Iraq': 93,
+  'Ireland': 94,
+  'Israel': 95,
+  'Italy': 96,
+  'Jamaica': 97,
+  'Japan': 98,
+  'Jordan': 99,
+  'Kazakhstan': 100,
+  'Kenya': 101,
+  'Kiribati': 102,
+  'Kuwait': 103,
+  'Kyrgyzstan': 104,
+  'Laos': 105,
+  'Latvia': 106,
+  'Lebanon': 107,
+  'Lesotho': 108,
+  'Liberia': 109,
+  'Libya': 110,
+  'Liechtenstein': 111,
+  'Lithuania': 112,
+  'Luxembourg': 113,
+  'Macao': 114,
+  'Macedonia': 115,
+  'Madagascar': 116,
+  'Malawi': 117,
+  'Malaysia': 118,
+  'Maldives': 119,
+  'Mali': 120,
+  'Malta': 121,
+  'Marshall Islands': 122,
+  'Martinique': 123,
+  'Mauritania': 124,
+  'Mauritius': 125,
+  'Mexico': 126,
+  'Micronesia': 127,
+  'Moldova': 128,
+  'Monaco': 129,
+  'Mongolia': 130,
+  'Montserrat': 131,
+  'Morocco': 132,
+  'Mozambique': 133,
+  'Myanmar': 134,
+  'Namibia': 135,
+  'Nauru': 136,
+  'Nepal': 137,
+  'Netherlands': 138,
+  'Netherlands Antilles': 139,
+  'New Zealand': 140,
+  'Nicaragua': 141,
+  'Niger': 142,
+  'Nigeria': 143,
+  'Niue': 144,
+  'Norfolk Island': 145,
+  'North Korea': 146,
+  'Norway': 147,
+  'Oman': 148,
+  'Pakistan': 149,
+  'Palau': 150,
+  'Panama': 151,
+  'Papua New Guinea': 152,
+  'Paraguay': 153,
+  'Peru': 154,
+  'Philippines': 155,
+  'Pitcairn Islands': 156,
+  'Poland': 157,
+  'Portugal': 158,
+  'Puerto Rico': 159,
+  'Qatar': 160,
+  'Republic of the Congo': 161,
+  'Romania': 162,
+  'Russian Federation': 163,
+  'Rwanda': 164,
+  'Saint Kitts and Nevis': 165,
+  'Saint Lucia': 166,
+  'Saint Pierre': 167,
+  'Saint Vicent and the Grenadines': 168,
+  'Samoa': 169,
+  'San Marino': 170,
+  'Saudi Arabia': 171,
+  'Senegal': 172,
+  'Serbia and Montenegro': 173,
+  'Seychelles': 174,
+  'Sierra Leone': 175,
+  'Singapore': 176,
+  'Slovakia': 177,
+  'Slovenia': 178,
+  'Soloman Islands': 179,
+  'Somalia': 180,
+  'South Africa': 181,
+  'South Georgia': 182,
+  'South Korea': 183,
+  'Soviet Union': 184,
+  'Spain': 185,
+  'Sri Lanka': 186,
+  'Sudan': 187,
+  'Suriname': 188,
+  'Swaziland': 189,
+  'Sweden': 190,
+  'Switzerland': 191,
+  'Syria': 192,
+  'Taiwan': 193,
+  'Tajikistan': 194,
+  'Tanzania': 195,
+  'Thailand': 196,
+  'Tibet': 197,
+  'Timor': 198,
+  'Togo': 199,
+  'Tonga': 200,
+  'Trinidad and Tobago': 201,
+  'Tunisia': 202,
+  'Turkey': 203,
+  'Turkmenistan': 204,
+  'Turks and Caicos Islands': 205,
+  'Tuvalu': 206,
+  'UAE': 207,
+  'US Virgin Islands': 208,
+  'Uganda': 209,
+  'Ukraine': 210,
+  'United Kingdom': 211,
+  'United States of America': 212,
+  'Uruguay': 213,
+  'Uzbekistan': 214,
+  'Vanuatu': 215,
+  'Vatican City': 216,
+  'Venezuela': 217,
+  'Vietnam': 218,
+  'Wallis and Futuna': 219,
+  'Yemen': 220,
+  'Zambia': 221,
+  'Zimbabwe': 222,
+  'Scania': 223
+});
+
 module.exports = {
-  ACCOUNT_TYPE: {
-    ADMIN: 'Admin',
-    OP: 'Operator',
-    HALF_OP: 'Half-Operator',
-    VOICE: 'Voice',
-    PLAYER: 'Player'
-  },
-  ACCOUNT_TYPE_ARRAY: [
-    'Admin', 'Operator', 'Half-Operator', 'Voice', 'Player'
-  ],
-  STREAM_API: {
-    NONE: 'none',
-    TWITCH: 'twitch',
-    HITBOX: 'hitbox',
-    BEAM: 'beam'
-  },
-  STREAM_API_ARRAY: ['none', 'twitch', 'hitbox', 'beam'],
-  STREAM_PREF: {
-    PIN_STREAM: 'Pin Stream',
-    HIDE_STREAM: 'Hide Stream',
-    PIN_GAME: 'Pin Game',
-    HIDE_GAME: 'Hide Game',
-    IMPORT_STREAMS: 'Import Streams'
-  },
-  STREAM_PREF_ARRAY: [
-    'Pin Stream', 'Hide Stream', 'Pin Game', 'Hide Game', 'Import Streams'
-  ],
-  COUNTRY_ARRAY: [
-    'None',
-    'Afghanistan',
-    'Albania',
-    'Algeria',
-    'American Samoa',
-    'Andorra',
-    'Angola',
-    'Anguilla',
-    'Antigua and Barbuda',
-    'Argentina',
-    'Armenia',
-    'Aruba',
-    'Australia',
-    'Austria',
-    'Azerbaijan',
-    'Bahamas',
-    'Bahrain',
-    'Bangladesh',
-    'Barbados',
-    'Belarus',
-    'Belgium',
-    'Belize',
-    'Benin',
-    'Bermuda',
-    'Bhutan',
-    'Bolivia',
-    'Bosnia',
-    'Botswana',
-    'Brazil',
-    'British Virgin Islands',
-    'Brunei',
-    'Bulgaria',
-    'Burkina Faso',
-    'Burundi',
-    'Cambodia',
-    'Cameroon',
-    'Canada',
-    'Cape Verde',
-    'Cayman Islands',
-    'Central African Republic',
-    'Chad',
-    'Chile',
-    'China',
-    'Christmas Island',
-    'Colombia',
-    'Comoros',
-    'Cook Islands',
-    'Costa Rica',
-    'Croatia',
-    'Cuba',
-    'Cyprus',
-    'Czech Republic',
-    'Democratic Republic of the Congo',
-    'Denmark',
-    'Djibouti',
-    'Dominica',
-    'Dominican Republic',
-    'Ecuador',
-    'Egypt',
-    'El Salvador',
-    'Equatorial Guinea',
-    'Eritrea',
-    'Estonia',
-    'Ethiopia',
-    'Falkland Islands',
-    'Faroe Islands',
-    'Fiji',
-    'Finland',
-    'France',
-    'French Polynesia',
-    'Gabon',
-    'Gambia',
-    'Georgia',
-    'Germany',
-    'Ghana',
-    'Gibraltar',
-    'Greece',
-    'Greenland',
-    'Grenada',
-    'Guam',
-    'Guatemala',
-    'Guinea',
-    'Guinea Bissau',
-    'Guyana',
-    'Haiti',
-    'Honduras',
-    'Hong Kong',
-    'Hungary',
-    'Iceland',
-    'India',
-    'Indonesia',
-    'Iran',
-    'Iraq',
-    'Ireland',
-    'Israel',
-    'Italy',
-    'Jamaica',
-    'Japan',
-    'Jordan',
-    'Kazakhstan',
-    'Kenya',
-    'Kiribati',
-    'Kuwait',
-    'Kyrgyzstan',
-    'Laos',
-    'Latvia',
-    'Lebanon',
-    'Lesotho',
-    'Liberia',
-    'Libya',
-    'Liechtenstein',
-    'Lithuania',
-    'Luxembourg',
-    'Macao',
-    'Macedonia',
-    'Madagascar',
-    'Malawi',
-    'Malaysia',
-    'Maldives',
-    'Mali',
-    'Malta',
-    'Marshall Islands',
-    'Martinique',
-    'Mauritania',
-    'Mauritius',
-    'Mexico',
-    'Micronesia',
-    'Moldova',
-    'Monaco',
-    'Mongolia',
-    'Montserrat',
-    'Morocco',
-    'Mozambique',
-    'Myanmar',
-    'Namibia',
-    'Nauru',
-    'Nepal',
-    'Netherlands',
-    'Netherlands Antilles',
-    'New Zealand',
-    'Nicaragua',
-    'Niger',
-    'Nigeria',
-    'Niue',
-    'Norfolk Island',
-    'North Korea',
-    'Norway',
-    'Oman',
-    'Pakistan',
-    'Palau',
-    'Panama',
-    'Papua New Guinea',
-    'Paraguay',
-    'Peru',
-    'Philippines',
-    'Pitcairn Islands',
-    'Poland',
-    'Portugal',
-    'Puerto Rico',
-    'Qatar',
-    'Republic of the Congo',
-    'Romania',
-    'Russian Federation',
-    'Rwanda',
-    'Saint Kitts and Nevis',
-    'Saint Lucia',
-    'Saint Pierre',
-    'Saint Vicent and the Grenadines',
-    'Samoa',
-    'San Marino',
-    'Saudi Arabia',
-    'Senegal',
-    'Serbia and Montenegro',
-    'Seychelles',
-    'Sierra Leone',
-    'Singapore',
-    'Slovakia',
-    'Slovenia',
-    'Soloman Islands',
-    'Somalia',
-    'South Africa',
-    'South Georgia',
-    'South Korea',
-    'Soviet Union',
-    'Spain',
-    'Sri Lanka',
-    'Sudan',
-    'Suriname',
-    'Swaziland',
-    'Sweden',
-    'Switzerland',
-    'Syria',
-    'Taiwan',
-    'Tajikistan',
-    'Tanzania',
-    'Thailand',
-    'Tibet',
-    'Timor',
-    'Togo',
-    'Tonga',
-    'Trinidad and Tobago',
-    'Tunisia',
-    'Turkey',
-    'Turkmenistan',
-    'Turks and Caicos Islands',
-    'Tuvalu',
-    'UAE',
-    'US Virgin Islands',
-    'Uganda',
-    'Ukraine',
-    'United Kingdom',
-    'United States of America',
-    'Uruguay',
-    'Uzbekistan',
-    'Vanuatu',
-    'Vatican City',
-    'Venezuela',
-    'Vietnam',
-    'Wallis and Futuna',
-    'Yemen',
-    'Zambia',
-    'Zimbabwe',
-    'Scania'
-  ],
-  // 1, None
-  // 2, Afghanistan
-  // 3, Albania
-  // 4, Algeria
-  // 5, American Samoa
-  // 6, Andorra
-  // 7, Angola
-  // 8, Anguilla
-  // 9, Antigua and Barbuda
-  // 10, Argentina
-  // 11, Armenia
-  // 12, Aruba
-  // 13, Australia
-  // 14, Austria
-  // 15, Azerbaijan
-  // 16, Bahamas
-  // 17, Bahrain
-  // 18, Bangladesh
-  // 19, Barbados
-  // 20, Belarus
-  // 21, Belgium
-  // 22, Belize
-  // 23, Benin
-  // 24, Bermuda
-  // 25, Bhutan
-  // 26, Bolivia
-  // 27, Bosnia
-  // 28, Botswana
-  // 29, Brazil
-  // 30, British Virgin Islands
-  // 31, Brunei
-  // 32, Bulgaria
-  // 33, Burkina Faso
-  // 34, Burundi
-  // 35, Cambodia
-  // 36, Cameroon
-  // 37, Canada
-  // 38, Cape Verde
-  // 39, Cayman Islands
-  // 40, Central African Republic
-  // 41, Chad
-  // 42, Chile
-  // 43, China
-  // 44, Christmas Island
-  // 45, Colombia
-  // 46, Comoros
-  // 47, Cook Islands
-  // 48, Costa Rica
-  // 49, Croatia
-  // 50, Cuba
-  // 51, Cyprus
-  // 52, Czech Republic
-  // 53, Democratic Republic of the Congo
-  // 54, Denmark
-  // 55, Djibouti
-  // 56, Dominica
-  // 57, Dominican Republic
-  // 58, Ecuador
-  // 59, Egypt
-  // 60, El Salvador
-  // 61, Equatorial Guinea
-  // 62, Eritrea
-  // 63, Estonia
-  // 64, Ethiopia
-  // 65, Falkland Islands
-  // 66, Faroe Islands
-  // 67, Fiji
-  // 68, Finland
-  // 69, France
-  // 70, French Polynesia
-  // 71, Gabon
-  // 72, Gambia
-  // 73, Georgia
-  // 74, Germany
-  // 75, Ghana
-  // 76, Gibraltar
-  // 77, Greece
-  // 78, Greenland
-  // 79, Grenada
-  // 80, Guam
-  // 81, Guatemala
-  // 82, Guinea
-  // 83, Guinea Bissau
-  // 84, Guyana
-  // 85, Haiti
-  // 86, Honduras
-  // 87, Hong Kong
-  // 88, Hungary
-  // 89, Iceland
-  // 90, India
-  // 91, Indonesia
-  // 92, Iran
-  // 93, Iraq
-  // 94, Ireland
-  // 95, Israel
-  // 96, Italy
-  // 97, Jamaica
-  // 98, Japan
-  // 99, Jordan
-  // 100, Kazakhstan
-  // 101, Kenya
-  // 102, Kiribati
-  // 103, Kuwait
-  // 104, Kyrgyzstan
-  // 105, Laos
-  // 106, Latvia
-  // 107, Lebanon
-  // 108, Lesotho
-  // 109, Liberia
-  // 110, Libya
-  // 111, Liechtenstein
-  // 112, Lithuania
-  // 113, Luxembourg
-  // 114, Macao
-  // 115, Macedonia
-  // 116, Madagascar
-  // 117, Malawi
-  // 118, Malaysia
-  // 119, Maldives
-  // 120, Mali
-  // 121, Malta
-  // 122, Marshall Islands
-  // 123, Martinique
-  // 124, Mauritania
-  // 125, Mauritius
-  // 126, Mexico
-  // 127, Micronesia
-  // 128, Moldova
-  // 129, Monaco
-  // 130, Mongolia
-  // 131, Montserrat
-  // 132, Morocco
-  // 133, Mozambique
-  // 134, Myanmar
-  // 135, Namibia
-  // 136, Nauru
-  // 137, Nepal
-  // 138, Netherlands
-  // 139, Netherlands Antilles
-  // 140, New Zealand
-  // 141, Nicaragua
-  // 142, Niger
-  // 143, Nigeria
-  // 144, Niue
-  // 145, Norfolk Island
-  // 146, North Korea
-  // 147, Norway
-  // 148, Oman
-  // 149, Pakistan
-  // 150, Palau
-  // 151, Panama
-  // 152, Papua New Guinea
-  // 153, Paraguay
-  // 154, Peru
-  // 155, Philippines
-  // 156, Pitcairn Islands
-  // 157, Poland
-  // 158, Portugal
-  // 159, Puerto Rico
-  // 160, Qatar
-  // 161, Republic of the Congo
-  // 162, Romania
-  // 163, Russian Federation
-  // 164, Rwanda
-  // 165, Saint Kitts and Nevis
-  // 166, Saint Lucia
-  // 167, Saint Pierre
-  // 168, Saint Vicent and the Grenadines
-  // 169, Samoa
-  // 170, San Marino
-  // 171, Saudi Arabia
-  // 172, Senegal
-  // 173, Serbia and Montenegro
-  // 174, Seychelles
-  // 175, Sierra Leone
-  // 176, Singapore
-  // 177, Slovakia
-  // 178, Slovenia
-  // 179, Soloman Islands
-  // 180, Somalia
-  // 181, South Africa
-  // 182, South Georgia
-  // 183, South Korea
-  // 184, Soviet Union
-  // 185, Spain
-  // 186, Sri Lanka
-  // 187, Sudan
-  // 188, Suriname
-  // 189, Swaziland
-  // 190, Sweden
-  // 191, Switzerland
-  // 192, Syria
-  // 193, Taiwan
-  // 194, Tajikistan
-  // 195, Tanzania
-  // 196, Thailand
-  // 197, Tibet
-  // 198, Timor
-  // 199, Togo
-  // 200, Tonga
-  // 201, Trinidad and Tobago
-  // 202, Tunisia
-  // 203, Turkey
-  // 204, Turkmenistan
-  // 205, Turks and Caicos Islands
-  // 206, Tuvalu
-  // 207, UAE
-  // 208, US Virgin Islands
-  // 209, Uganda
-  // 210, Ukraine
-  // 211, United Kingdom
-  // 212, United States of America
-  // 213, Uruguay
-  // 214, Uzbekistan
-  // 215, Vanuatu
-  // 216, Vatican City
-  // 217, Venezuela
-  // 218, Vietnam
-  // 219, Wallis and Futuna
-  // 220, Yemen
-  // 221, Zambia
-  // 222, Zimbabwe
-  // 223, Scania
+  STREAM_API: streamAPI,
+  STREAM_APIS: streamAPI.enums.map(function(it) {
+    return it.key;
+  }),
+  STREAM_VISIBILITY: streamVisibility,
+  STREAM_VISIBILITIES: streamVisibility.enums.map(function(it) {
+    return it.value;
+  }),
+  STREAM_PREF: streamPref,
+  STREAM_PREFS: streamPref.enums.map(function(it) {
+    return it.value;
+  }),
+  COUNTRY: country,
+  COUNTRIES: country.enums.map(function(it) {
+    return it.value;
+  })
 };

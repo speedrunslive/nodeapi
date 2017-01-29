@@ -3,8 +3,8 @@
  */
 'use strict';
 
-var models = require('../../models');
-var errors = require('restify-errors');
+var models = require('../../models'),
+  errors = require('restify-errors');
 
 function streamsGet(req, res, next) {
   models.Stream.find({
@@ -23,7 +23,8 @@ function streamsGet(req, res, next) {
         message: 'No player with name ' + req.params.name
       }));
     } else {
-      var formatted = stream.get();
+      var formatted = stream.toJSON();
+      formatted.api = formatted.api.toLowerCase();
       formatted.name = formatted.player.name;
       delete formatted.player;
       res.send(formatted);

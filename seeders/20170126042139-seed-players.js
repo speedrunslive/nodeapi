@@ -7,21 +7,21 @@ module.exports = {
   up: function(queryInterface, sequelize) {
     return queryInterface.bulkInsert('Players', [{
       name: 'sushi',
-      account_type: 'Player',
+      permissions: 0,
       twitter: 'sushi',
-      country: 'None',
+      country: 1,
     }, {
       name: 'Sluip',
-      account_type: 'Admin',
+      permissions: 0,
       twitter: 'Sluip',
       youtube: '',
-      country: 'None',
+      country: 1,
     }, {
       name: 'Jiano',
-      account_type: 'Admin',
+      permissions: 0,
       twitter: 'Jiano',
       youtube: 'SunJiano',
-      country: 'United States of America',
+      country: 212,
     }], {});
   },
   down: function(queryInterface, sequelize) {
