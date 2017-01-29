@@ -3,7 +3,7 @@
  */
 'use strict';
 
-module.exports = function ensureLoggedOut(options) {
+function ensureLoggedOut(options) {
   if (typeof options === 'string') {
     options = {
       redirectTo: options
@@ -19,4 +19,6 @@ module.exports = function ensureLoggedOut(options) {
     }
     next();
   };
-};
+}
+
+module.exports = ensureLoggedOut;

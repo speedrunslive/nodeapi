@@ -14,7 +14,7 @@ module.exports = {
       },
       name: {
         allowNull: false,
-        type: sequelize.STRING
+        type: sequelize.STRING(50)
       },
       permissions: {
         allowNull: false,
@@ -23,7 +23,7 @@ module.exports = {
       },
       twitter: {
         allowNull: false,
-        type: sequelize.STRING
+        type: sequelize.STRING(25)
       },
       youtube: {
         allowNull: false,
@@ -37,18 +37,18 @@ module.exports = {
       last_seen: {
         allowNull: false,
         type: sequelize.DATE,
-        defaultValue: sequelize.fn('NOW')
+        defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
       },
       created_at: {
         allowNull: false,
         type: sequelize.DATE,
-        defaultValue: sequelize.fn('NOW')
+        defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
       },
       updated_at: {
         allowNull: false,
         type: sequelize.DATE,
-        defaultValue: sequelize.fn('NOW'),
-        onUpdate: sequelize.fn('NOW')
+        defaultValue: sequelize.literal(
+          'CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
       }
     });
   },

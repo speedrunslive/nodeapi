@@ -23,16 +23,16 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: 'CASCADE',
       type: DataTypes.INTEGER
     },
-    channel: {
-      allowNull: false,
-      primaryKey: true,
-      type: DataTypes.STRING
-    },
     api: {
       allowNull: false,
       primaryKey: true,
       type: DataTypes.ENUM,
       values: constants.STREAM_APIS
+    },
+    channel: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.STRING(50)
     },
     whitelisted: {
       allowNull: false,

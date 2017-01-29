@@ -19,21 +19,21 @@ module.exports = {
           references: {
             model: 'Players',
             key: 'id',
-            name: 'streamPlayerId'
+            name: 'playerStreamId'
           },
           unique: true,
           onUpdate: 'CASCADE',
           onDelete: 'CASCADE',
           type: sequelize.INTEGER
         },
-        channel: {
-          allowNull: false,
-          type: sequelize.STRING
-        },
         api: {
           allowNull: false,
           type: sequelize.ENUM,
           values: constants.STREAM_APIS
+        },
+        channel: {
+          allowNull: false,
+          type: sequelize.STRING(50)
         },
         whitelisted: {
           allowNull: false,
@@ -58,23 +58,26 @@ module.exports = {
         last_warning: {
           allowNull: false,
           type: sequelize.DATE,
-          defaultValue: sequelize.fn('NOW')
+          defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
         },
         created_at: {
           allowNull: false,
           type: sequelize.DATE,
-          defaultValue: sequelize.fn('NOW')
+          defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
         },
         updated_at: {
           allowNull: false,
           type: sequelize.DATE,
-          onUpdate: sequelize.fn('NOW'),
-          defaultValue: sequelize.fn('NOW')
+          defaultValue: sequelize.literal(
+            'CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
         }
+      }, {
+        charset: 'utf8mb4',
+        collate: 'utf8mb4_unicode_ci'
       })
       .then(function() {
         return queryInterface.sequelize.query(
-          'ALTER TABLE `Streams` ADD UNIQUE `stream`(`api`, `channel`)'
+          'ALTER TABLE `Streams` ADD UNIQUE `stream`(`api`, `channel`);'
         );
       });
   },
