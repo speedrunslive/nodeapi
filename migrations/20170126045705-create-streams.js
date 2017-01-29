@@ -19,7 +19,7 @@ module.exports = {
           references: {
             model: 'Players',
             key: 'id',
-            name: 'playerStreamId'
+            name: 'streamPlayerId'
           },
           unique: true,
           onUpdate: 'CASCADE',
@@ -57,17 +57,17 @@ module.exports = {
         },
         last_warning: {
           allowNull: false,
-          type: sequelize.DATE,
+          type: 'TIMESTAMP',
           defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
         },
         created_at: {
           allowNull: false,
-          type: sequelize.DATE,
+          type: 'TIMESTAMP',
           defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
         },
         updated_at: {
           allowNull: false,
-          type: sequelize.DATE,
+          type: 'TIMESTAMP',
           defaultValue: sequelize.literal(
             'CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
         }

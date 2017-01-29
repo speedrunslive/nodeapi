@@ -7,29 +7,36 @@ var constants = require('../src/models/constants');
 
 module.exports = {
   up: function(queryInterface, sequelize) {
-    return queryInterface.createTable('Seasons', {
+    return queryInterface.createTable('CurrentRaces', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
+        type: sequelize.STRING(5)
+      },
+      game_id: {
+        references: {
+          model: 'Games',
+          key: 'id',
+          name: 'currentRaceGameId'
+        },
+        onUpdate: 'CASCADE',
         type: sequelize.INTEGER
       },
-      name: {
+      goal: {
         allowNull: false,
         type: sequelize.STRING
       },
-      short: {
-        allowNull: false,
-        type: sequelize.STRING
-      },
-      started: {
+      time: {
         allowNull: false,
         type: 'TIMESTAMP',
-        defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
       },
-      ended: {
+      state: {
         allowNull: false,
-        type: 'TIMESTAMP'
+        type: 'TINYINT'
+      },
+      filename: {
+        allowNull: false,
+        type: sequelize.BOOLEAN
       }
     }, {
       charset: 'utf8mb4',
@@ -37,6 +44,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, sequelize) {
-    return queryInterface.dropTable('Seasons');
+    return queryInterface.dropTable('CurrentRaces');
   }
 };

@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     name: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.STRING(50)
     },
     permissions: {
       allowNull: false,
@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     twitter: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.STRING(25)
     },
     youtube: {
       allowNull: false,
@@ -35,16 +35,21 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       defaultValue: 1
     },
+    last_seen: {
+      allowNull: false,
+      type: 'TIMESTAMP',
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+    },
     created_at: {
       allowNull: false,
-      type: DataTypes.DATE,
-      defaultValue: sequelize.fn('NOW')
+      type: 'TIMESTAMP',
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
     },
     updated_at: {
       allowNull: false,
-      type: DataTypes.DATE,
-      onUpdate: sequelize.fn('NOW'),
-      defaultValue: sequelize.fn('NOW')
+      type: 'TIMESTAMP',
+      defaultValue: sequelize.literal(
+        'CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
     }
   }, {
     instanceMethods: {

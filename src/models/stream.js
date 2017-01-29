@@ -56,21 +56,23 @@ module.exports = function(sequelize, DataTypes) {
     },
     last_warning: {
       allowNull: false,
-      type: DataTypes.DATE,
-      defaultValue: sequelize.fn('NOW')
+      type: 'TIMESTAMP',
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
     },
     created_at: {
       allowNull: false,
-      type: DataTypes.DATE,
-      defaultValue: sequelize.fn('NOW')
+      type: 'TIMESTAMP',
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
     },
     updated_at: {
       allowNull: false,
-      type: DataTypes.DATE,
-      onUpdate: sequelize.fn('NOW'),
-      defaultValue: sequelize.fn('NOW')
+      type: 'TIMESTAMP',
+      defaultValue: sequelize.literal(
+        'CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
     }
   }, {
+    charset: 'utf8mb4',
+    collate: 'utf8mb4_unicode_ci',
     classMethods: {
       associate: function(models) {
         Stream.belongsTo(models.Player, {
