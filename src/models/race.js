@@ -4,7 +4,7 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var Player = sequelize.define('Race', {
+  var Race = sequelize.define('Race', {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -49,5 +49,5 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {}
     }
   });
-  return Player;
+  return Race;
 };

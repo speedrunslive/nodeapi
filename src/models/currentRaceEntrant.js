@@ -4,7 +4,7 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var Goal = sequelize.define('Goal', {
+  var CurrentRaceEntrant = sequelize.define('CurrentRaceEntrant', {
     race_id: {
       allowNull: false,
       type: DataTypes.STRING(5)
@@ -41,5 +41,5 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {}
     }
   });
-  return Goal;
+  return CurrentRaceEntrant;
 };

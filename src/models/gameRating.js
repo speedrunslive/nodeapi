@@ -4,7 +4,7 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var Player = sequelize.define('GameRating', {
+  var GameRating = sequelize.define('GameRating', {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -57,5 +57,5 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {}
     }
   });
-  return Player;
+  return GameRating;
 };
