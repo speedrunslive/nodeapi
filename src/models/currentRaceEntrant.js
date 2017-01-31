@@ -35,10 +35,11 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     charset: 'utf8mb4',
     collate: 'utf8mb4_unicode_ci',
+    underscored: true,
+    timestamps: false,
     classMethods: {
       associate: function(models) {}
-    },
-    underscored: true
+    }
   });
   return Player;
 };

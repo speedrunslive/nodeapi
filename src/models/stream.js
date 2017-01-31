@@ -25,13 +25,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     api: {
       allowNull: false,
-      primaryKey: true,
       type: DataTypes.ENUM,
       values: constants.STREAM_APIS
     },
     channel: {
       allowNull: false,
-      primaryKey: true,
       type: DataTypes.STRING(50)
     },
     whitelisted: {
@@ -69,6 +67,18 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     charset: 'utf8mb4',
     collate: 'utf8mb4_unicode_ci',
+    underscored: true,
+    timestamps: false,
+    instanceMethods: {
+      v1JSON: function() {
+        var values = Object.assign({}, this.get());
+        values.api = values.api.toLowerCase();
+        values.name = values.player.name;
+        delete values.id;
+        delete values.player;
+        return values;
+      }
+    },
     classMethods: {
       associate: function(models) {
         Stream.belongsTo(models.Player, {
@@ -81,8 +91,7 @@ module.exports = function(sequelize, DataTypes) {
         });
       },
       API: constants.STREAM_API
-    },
-    underscored: true
+    }
   });
   return Stream;
 };

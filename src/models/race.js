@@ -43,10 +43,11 @@ module.exports = function(sequelize, DataTypes) {
       type: 'TIMESTAMP'
     }
   }, {
+    underscored: true,
+    timestamps: false,
     classMethods: {
       associate: function(models) {}
-    },
-    underscored: true
+    }
   });
   return Player;
 };

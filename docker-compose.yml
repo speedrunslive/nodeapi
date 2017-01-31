@@ -5,9 +5,14 @@ services:
     image: srlapi
     container_name: srl_api
     hostname: api
+    command: npm run dev # npm start for production
     build:
       context: .
-      dockerfile: ./docker/nodejs-dev/Dockerfile
+      dockerfile: ./docker/nodejs/Dockerfile
+    environment:
+      NODE_ENV: development
+      REDIS_HOST: redis
+      COOKIE_DOMAIN:
     volumes:
       - "./src:/app/src"
     ports:

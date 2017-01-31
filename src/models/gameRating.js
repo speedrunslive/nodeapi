@@ -51,10 +51,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DOUBLE(12, 9)
     }
   }, {
+    underscored: true,
+    timestamps: false,
     classMethods: {
       associate: function(models) {}
-    },
-    underscored: true
+    }
   });
   return Player;
 };

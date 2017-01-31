@@ -3,14 +3,14 @@
  */
 'use strict';
 
-var constants = require('../../models/constants'),
-  models = require('../../models'),
-  errors = require('restify-errors');
+var constants = require('../../models/constants');
+var models = require('../../models');
+var errors = require('restify-errors');
 
-function playersGet(req, res, next) {
-  models.Player.find({
+function findPlayer(name) {
+  return models.Player.find({
     where: {
-      name: req.params.name
+      name: name
     },
     include: [{
       model: models.Stream,
@@ -19,25 +19,57 @@ function playersGet(req, res, next) {
       required: false
     }],
     attributes: {
-      exclude: ['permissions', 'created_at', 'updated_at']
+      exclude: ['permissions', 'last_seen', 'created_at', 'updated_at']
     }
-  }).then(function(player) {
+  });
+}
+
+function playersGet(req, res, next) {
+  if (!req.params.name || req.params.name < 1) {
+    res.send(new errors.NotFoundError({
+      message: 'name `' + req.params.name + '` cannot be blank'
+    }));
+    return;
+  }
+
+  findPlayer(req.params.name).then(function(player) {
     if (!player) {
       res.send(new errors.NotFoundError({
         message: 'No player with name ' + req.params.name
       }));
     } else {
-      var formatted = player.toJSON();
-      if (!formatted.stream) {
-        formatted.api = '';
-        formatted.channel = '';
-      } else {
-        formatted.api = player.stream.api.toLowerCase();
-        formatted.channel = player.stream.channel;
-      }
-      formatted.country = constants.COUNTRY.get(formatted.country);
-      delete formatted.stream;
-      res.send(formatted);
+      res.send(player.v1JSON());
+    }
+  });
+}
+
+function playersPost(req, res, next) {
+  if (!req.params.name || req.params.name < 1) {
+    res.send(new errors.NotFoundError({
+      message: '`name` is missing or blank'
+    }));
+    return;
+  } else if (!req.params.newName || req.params.newName < 1) {
+    res.send(new errors.NotFoundError({
+      message: '`newName` is missing or blank'
+    }));
+    return;
+  }
+
+  findPlayer(req.params.name).then(function(player) {
+    if (!player) {
+      res.send(new errors.NotFoundError({
+        message: 'No player with name ' + req.params.name
+      }));
+    } else {
+      player.set('name', req.params.newName);
+      player.save({
+        fields: ['name']
+      }).then(function(results) {
+        res.send(player.v1JSON());
+      }).catch(function(error) {
+        res.send(error); // CLEANUP: add real error
+      });
     }
   });
 }
@@ -47,6 +79,10 @@ function registerRoutes(server) {
     path: '/players/:name',
     version: '1.0.0'
   }, playersGet);
+  server.post({
+    path: '/players/:name',
+    version: '1.0.0'
+  }, playersPost);
 }
 
 module.exports = registerRoutes;

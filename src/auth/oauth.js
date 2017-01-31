@@ -3,12 +3,12 @@
  */
 'use strict';
 
-var oauth2orize = require('oauth2orize-restify'),
-  passport = require('passport-restify'),
-  idgen = require('idgen'),
-  ensureLoggedIn = require('./ensureLoggedIn'),
-  store = require('../redis'),
-  oauth = oauth2orize.createServer();
+var oauth2orize = require('oauth2orize-restify');
+var passport = require('passport-restify');
+var idgen = require('idgen');
+var ensureLoggedIn = require('./ensureLoggedIn');
+var store = require('../redis');
+var oauth = oauth2orize.createServer();
 
 oauth.serializeClient(function(client, done) {
   console.log('serialise client: %s', client.client_id);

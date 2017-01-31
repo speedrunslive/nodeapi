@@ -4,5 +4,5 @@
 'use strict';
 
 module.exports = require('redis').createClient({
-  host: 'redis'
+  host: process.env.REDIS_HOST
 });

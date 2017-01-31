@@ -48,10 +48,26 @@ module.exports = function(sequelize, DataTypes) {
       type: 'TIMESTAMP'
     }
   }, {
+    underscored: true,
+    timestamps: false,
     instanceMethods: {
       toJSON: function() {
         var values = Object.assign({}, this.get());
         delete values.permissions;
+        return values;
+      },
+      v1JSON: function() {
+        var values = Object.assign({}, this.get());
+        if (!values.stream) {
+          values.api = '';
+          values.channel = '';
+        } else {
+          values.api = this.stream.api.toLowerCase();
+          values.channel = this.stream.channel;
+        }
+        values.country = constants.COUNTRY.get(values.country);
+        delete values.permissions;
+        delete values.stream;
         return values;
       }
     },
@@ -66,8 +82,7 @@ module.exports = function(sequelize, DataTypes) {
           onDelete: 'CASCADE'
         });
       }
-    },
-    underscored: true
+    }
   });
   return Player;
 };

@@ -14,6 +14,7 @@ module.exports = {
       },
       name: {
         allowNull: false,
+        unique: true,
         type: sequelize.STRING(50)
       },
       permissions: {
