@@ -4,7 +4,7 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var Player = sequelize.define('Game', {
+  var Game = sequelize.define('Game', {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -40,5 +40,5 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {}
     }
   });
-  return Player;
+  return Game;
 };

@@ -4,44 +4,33 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var CurrentRace = sequelize.define('CurrentRace', {
+  var LegacyGameRank = sequelize.define('LegacyGameRank', {
     id: {
       allowNull: false,
+      autoIncrement: true,
       primaryKey: true,
-      type: DataTypes.STRING(5)
+      type: DataTypes.INTEGER.UNSIGNED
     },
     game_id: {
+      allowNull: false,
       references: {
         model: 'Games',
-        key: 'id'
+        key: 'id',
+        name: 'gameRankingGameId'
       },
       onUpdate: 'CASCADE',
       type: DataTypes.INTEGER.UNSIGNED
     },
-    goal: {
+    popularity: {
       allowNull: false,
-      type: DataTypes.STRING
-    },
-    time: {
-      allowNull: false,
-      type: 'TIMESTAMP'
-    },
-    state: {
-      allowNull: false,
-      type: DataTypes.INTEGER.UNSIGNED
-    },
-    filename: {
-      allowNull: false,
-      type: DataTypes.BOOLEAN
+      type: DataTypes.DECIMAL(12, 6)
     }
   }, {
-    charset: 'utf8mb4',
-    collate: 'utf8mb4_unicode_ci',
     underscored: true,
     timestamps: false,
     classMethods: {
       associate: function(models) {}
     }
   });
-  return CurrentRace;
+  return LegacyGameRank;
 };
