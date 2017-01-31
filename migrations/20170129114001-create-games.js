@@ -10,7 +10,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: sequelize.INTEGER
+        type: sequelize.INTEGER.UNSIGNED
       },
       name: {
         allowNull: false,

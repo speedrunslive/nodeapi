@@ -10,7 +10,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: sequelize.INTEGER
+        type: sequelize.INTEGER.UNSIGNED
       },
       season_id: {
         allowNull: false,
@@ -20,7 +20,7 @@ module.exports = {
           name: 'raceSeasonId'
         },
         onUpdate: 'CASCADE',
-        type: sequelize.INTEGER
+        type: sequelize.INTEGER.UNSIGNED
       },
       game_id: {
         allowNull: false,
@@ -30,7 +30,7 @@ module.exports = {
           name: 'raceGameId'
         },
         onUpdate: 'CASCADE',
-        type: sequelize.INTEGER
+        type: sequelize.INTEGER.UNSIGNED
       },
       goal_id: {
         allowNull: false,
@@ -40,7 +40,7 @@ module.exports = {
           name: 'raceGoalId'
         },
         onUpdate: 'CASCADE',
-        type: sequelize.INTEGER
+        type: sequelize.INTEGER.UNSIGNED
       },
       date: {
         allowNull: false,

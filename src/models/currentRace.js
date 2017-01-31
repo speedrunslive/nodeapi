@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       },
       onUpdate: 'CASCADE',
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER.UNSIGNED
     },
     goal: {
       allowNull: false,
@@ -28,7 +28,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     state: {
       allowNull: false,
-      type: 'TINYINT'
+      type: DataTypes.INTEGER.UNSIGNED
     },
     filename: {
       allowNull: false,

@@ -12,7 +12,7 @@ module.exports = {
           allowNull: false,
           autoIncrement: true,
           primaryKey: true,
-          type: sequelize.INTEGER
+          type: sequelize.INTEGER.UNSIGNED
         },
         player_id: {
           allowNull: false,
@@ -24,7 +24,7 @@ module.exports = {
           unique: true,
           onUpdate: 'CASCADE',
           onDelete: 'CASCADE',
-          type: sequelize.INTEGER
+          type: sequelize.INTEGER.UNSIGNED
         },
         api: {
           allowNull: false,
@@ -47,12 +47,12 @@ module.exports = {
         },
         visibility: {
           allowNull: false,
-          type: 'TINYINT',
+          type: sequelize.INTEGER.UNSIGNED,
           defaultValue: 2
         },
         warnings: {
           allowNull: false,
-          type: sequelize.INTEGER,
+          type: sequelize.INTEGER.UNSIGNED,
           defaultValue: 0
         },
         last_warning: {

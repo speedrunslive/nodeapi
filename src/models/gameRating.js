@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER.UNSIGNED
     },
     player_id: {
       allowNull: false,
@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       },
       onUpdate: 'CASCADE',
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER.UNSIGNED
     },
     season_id: {
       allowNull: false,
@@ -27,7 +27,7 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       },
       onUpdate: 'CASCADE',
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER.UNSIGNED
     },
     game_id: {
       allowNull: false,
@@ -36,7 +36,7 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       },
       onUpdate: 'CASCADE',
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER.UNSIGNED
     },
     rating: {
       allowNull: false,

@@ -10,7 +10,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: sequelize.INTEGER
+        type: sequelize.INTEGER.UNSIGNED
       },
       player_id: {
         allowNull: false,
@@ -20,7 +20,7 @@ module.exports = {
           name: 'raceResultPlayerId'
         },
         onUpdate: 'CASCADE',
-        type: sequelize.INTEGER
+        type: sequelize.INTEGER.UNSIGNED
       },
       race_id: {
         allowNull: false,
@@ -30,15 +30,15 @@ module.exports = {
           name: 'raceResultRaceId'
         },
         onUpdate: 'CASCADE',
-        type: sequelize.INTEGER
+        type: sequelize.INTEGER.UNSIGNED
       },
       place: {
         allowNull: false,
-        type: sequelize.INTEGER
+        type: sequelize.INTEGER.UNSIGNED
       },
       time: {
         allowNull: false,
-        type: sequelize.INTEGER
+        type: sequelize.INTEGER.UNSIGNED
       },
       comment: {
         allowNull: false,

@@ -24,11 +24,12 @@ function findPlayer(name) {
   });
 }
 
-function playersGet(req, res, next) {
+function getPlayerByName(req, res, next) {
   if (!req.params.name || req.params.name < 1) {
     res.send(new errors.NotFoundError({
       message: 'name `' + req.params.name + '` cannot be blank'
     }));
+    next();
     return;
   }
 
@@ -43,16 +44,18 @@ function playersGet(req, res, next) {
   });
 }
 
-function playersPost(req, res, next) {
+function putPlayerByName(req, res, next) {
   if (!req.params.name || req.params.name < 1) {
     res.send(new errors.NotFoundError({
       message: '`name` is missing or blank'
     }));
+    next();
     return;
   } else if (!req.params.newName || req.params.newName < 1) {
     res.send(new errors.NotFoundError({
       message: '`newName` is missing or blank'
     }));
+    next();
     return;
   }
 
@@ -78,11 +81,11 @@ function registerRoutes(server) {
   server.get({
     path: '/players/:name',
     version: '1.0.0 '
-  }, playersGet);
+  }, getPlayerByName);
   server.put({
     path: '/players/:name',
     version: '1.0.0'
-  }, playersPost); // TODO: add auth middleware
+  }, putPlayerByName); // TODO: add auth middleware
 }
 
 module.exports = registerRoutes;

@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER.UNSIGNED
     },
     name: {
       allowNull: false,
@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     permissions: {
       allowNull: false,
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER.UNSIGNED,
       defaultValue: 0
     },
     twitter: {
@@ -32,7 +32,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     country: {
       allowNull: false,
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER.UNSIGNED,
       defaultValue: 1
     },
     last_seen: {
@@ -52,11 +52,6 @@ module.exports = function(sequelize, DataTypes) {
     timestamps: false,
     instanceMethods: {
       toJSON: function() {
-        var values = Object.assign({}, this.get());
-        delete values.permissions;
-        return values;
-      },
-      v1JSON: function() {
         var values = Object.assign({}, this.get());
         if (!values.stream) {
           values.api = '';

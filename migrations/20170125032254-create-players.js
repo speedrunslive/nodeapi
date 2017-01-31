@@ -10,7 +10,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: sequelize.INTEGER
+        type: sequelize.INTEGER.UNSIGNED
       },
       name: {
         allowNull: false,
@@ -19,7 +19,7 @@ module.exports = {
       },
       permissions: {
         allowNull: false,
-        type: sequelize.INTEGER,
+        type: sequelize.INTEGER.UNSIGNED,
         defaultValue: 0
       },
       twitter: {
@@ -32,7 +32,7 @@ module.exports = {
       },
       country: {
         allowNull: false,
-        type: 'TINYINT',
+        type: sequelize.INTEGER.UNSIGNED,
         defaultValue: 1
       },
       last_seen: {

@@ -20,7 +20,7 @@ function findStream(name) {
   });
 }
 
-function streamsGet(req, res, next) {
+function getStreamByName(req, res, next) {
   if (!req.params.name || req.params.name < 1) {
     res.send(new errors.NotFoundError({
       message: 'name `' + req.params.name + '` cannot be blank'
@@ -39,7 +39,7 @@ function streamsGet(req, res, next) {
   });
 }
 
-function streamsPost(req, res, next) {
+function putStreamByName(req, res, next) {
   if (!req.params.name || req.params.name < 1) {
     res.send(new errors.NotFoundError({
       message: '`name` is missing or blank'
@@ -74,11 +74,11 @@ function registerRoutes(server) {
   server.get({
     path: '/streams/:name',
     version: '1.0.0'
-  }, streamsGet);
+  }, getStreamByName);
   server.put({
     path: '/streams/:name',
     version: '1.0.0'
-  }, streamsPost); // TODO: add auth middleware
+  }, putStreamByName); // TODO: add auth middleware
 }
 
 module.exports = registerRoutes;

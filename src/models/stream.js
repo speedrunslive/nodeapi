@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER.UNSIGNED
     },
     player_id: {
       allowNull: false,
@@ -21,7 +21,7 @@ module.exports = function(sequelize, DataTypes) {
       },
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER.UNSIGNED
     },
     api: {
       allowNull: false,
@@ -44,12 +44,12 @@ module.exports = function(sequelize, DataTypes) {
     },
     visibility: {
       allowNull: false,
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER.UNSIGNED,
       defaultValue: 2
     },
     warnings: {
       allowNull: false,
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER.UNSIGNED,
       defaultValue: 0
     },
     last_warning: {
@@ -70,7 +70,7 @@ module.exports = function(sequelize, DataTypes) {
     underscored: true,
     timestamps: false,
     instanceMethods: {
-      v1JSON: function() {
+      toJSON: function() {
         var values = Object.assign({}, this.get());
         values.api = values.api.toLowerCase();
         values.name = values.player.name;

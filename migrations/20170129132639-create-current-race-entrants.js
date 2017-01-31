@@ -17,7 +17,7 @@ module.exports = {
           name: 'currentRaceEntrantPlayerId'
         },
         onUpdate: 'CASCADE',
-        type: sequelize.INTEGER
+        type: sequelize.INTEGER.UNSIGNED
       },
       name: {
         allowNull: false,
@@ -25,11 +25,11 @@ module.exports = {
       },
       place: {
         allowNull: false,
-        type: sequelize.INTEGER
+        type: sequelize.INTEGER.UNSIGNED
       },
       time: {
         allowNull: false,
-        type: sequelize.INTEGER
+        type: sequelize.INTEGER.UNSIGNED
       },
       comment: {
         type: sequelize.STRING(140)

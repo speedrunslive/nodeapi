@@ -46,6 +46,7 @@ require('./auth/oauth')(server);
 require('./auth/login')(server);
 require('./routes/v1/players')(server);
 require('./routes/v1/streams')(server);
+require('./routes/v1/games')(server);
 
 server.listen(port, function() {
   console.log('%s listening at %s', server.name, server.url);

@@ -10,7 +10,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: sequelize.INTEGER
+        type: sequelize.INTEGER.UNSIGNED
       },
       player_id: {
         allowNull: false,
@@ -20,7 +20,7 @@ module.exports = {
           name: 'gameRatingPlayerId'
         },
         onUpdate: 'CASCADE',
-        type: sequelize.INTEGER
+        type: sequelize.INTEGER.UNSIGNED
       },
       season_id: {
         allowNull: false,
@@ -30,7 +30,7 @@ module.exports = {
           name: 'gameRatingSeasonId'
         },
         onUpdate: 'CASCADE',
-        type: sequelize.INTEGER
+        type: sequelize.INTEGER.UNSIGNED
       },
       game_id: {
         allowNull: false,
@@ -40,7 +40,7 @@ module.exports = {
           name: 'gameRatingGameId'
         },
         onUpdate: 'CASCADE',
-        type: sequelize.INTEGER
+        type: sequelize.INTEGER.UNSIGNED
       },
       rating: {
         allowNull: false,

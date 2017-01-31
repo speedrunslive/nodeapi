@@ -18,7 +18,7 @@ module.exports = {
           name: 'currentRaceGameId'
         },
         onUpdate: 'CASCADE',
-        type: sequelize.INTEGER
+        type: sequelize.INTEGER.UNSIGNED
       },
       goal: {
         allowNull: false,
@@ -30,7 +30,7 @@ module.exports = {
       },
       state: {
         allowNull: false,
-        type: 'TINYINT'
+        type: sequelize.INTEGER.UNSIGNED
       },
       filename: {
         allowNull: false,

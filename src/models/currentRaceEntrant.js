@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       },
       onUpdate: 'CASCADE',
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER.UNSIGNED
     },
     name: {
       allowNull: false,
@@ -23,11 +23,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     place: {
       allowNull: false,
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER.UNSIGNED
     },
     time: {
       allowNull: false,
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER.UNSIGNED
     },
     comment: {
       type: DataTypes.STRING(140)
