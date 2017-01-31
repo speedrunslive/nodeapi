@@ -20,6 +20,10 @@ module.exports = function(sequelize, DataTypes) {
       onUpdate: 'CASCADE',
       type: DataTypes.INTEGER.UNSIGNED
     },
+    popularityrank: {
+      allowNull: false,
+      type: DataTypes.INTEGER.UNSIGNED
+    },
     popularity: {
       allowNull: false,
       type: DataTypes.DECIMAL(12, 6)

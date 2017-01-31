@@ -32,6 +32,11 @@ module.exports = function(sequelize, DataTypes) {
       toJSON: function() {
         var values = Object.assign({}, this.get());
         values.abbrev = values.short;
+        if (values.ranking) {
+          values.popularity = values.ranking.popularity;
+          values.popularityrank = values.ranking.popularityrank;
+          delete values.ranking;
+        }
         delete values.abbrev;
         return values;
       }
