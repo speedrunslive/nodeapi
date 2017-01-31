@@ -77,7 +77,7 @@ function playersPost(req, res, next) {
 function registerRoutes(server) {
   server.get({
     path: '/players/:name',
-    version: '1.0.0'
+    version: '1.0.0 '
   }, playersGet);
   server.put({
     path: '/players/:name',
