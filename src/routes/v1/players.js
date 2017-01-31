@@ -79,10 +79,10 @@ function registerRoutes(server) {
     path: '/players/:name',
     version: '1.0.0'
   }, playersGet);
-  server.post({
+  server.put({
     path: '/players/:name',
     version: '1.0.0'
-  }, playersPost);
+  }, playersPost); // TODO: add auth middleware
 }
 
 module.exports = registerRoutes;

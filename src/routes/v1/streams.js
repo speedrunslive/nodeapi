@@ -78,7 +78,7 @@ function registerRoutes(server) {
   server.post({
     path: '/streams/:name',
     version: '1.0.0'
-  }, streamsPost);
+  }, streamsPost); // TODO: add auth middleware
 }
 
 module.exports = registerRoutes;
