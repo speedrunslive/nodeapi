@@ -4,7 +4,7 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var LegacyGameRank = sequelize.define('LegacyGameRank', {
+  var LegacyGameRanking = sequelize.define('LegacyGameRanking', {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -32,8 +32,17 @@ module.exports = function(sequelize, DataTypes) {
     underscored: true,
     timestamps: false,
     classMethods: {
-      associate: function(models) {}
+      associate: function(models) {
+        LegacyGameRanking.belongsTo(models.Game, {
+          foreign_key: {
+            allowNull: false,
+            name: 'game_id'
+          },
+          as: 'game',
+          onDelete: 'CASCADE'
+        });
+      }
     }
   });
-  return LegacyGameRank;
+  return LegacyGameRanking;
 };

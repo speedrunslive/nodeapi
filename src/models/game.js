@@ -42,7 +42,16 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     classMethods: {
-      associate: function(models) {}
+      associate: function(models) {
+        Game.hasOne(models.LegacyGameRanking, {
+          foreign_key: {
+            allowNull: false,
+            name: 'game_id'
+          },
+          as: 'ranking',
+          onDelete: 'CASCADE'
+        });
+      }
     }
   });
   return Game;

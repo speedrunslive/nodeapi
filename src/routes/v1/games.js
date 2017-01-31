@@ -9,7 +9,7 @@ var errors = require('restify-errors');
 function getGames(req, res, next) {
   models.Game.findAll({
     include: [{
-      model: models.LegacyGameRank,
+      model: models.LegacyGameRanking,
       as: 'ranking',
       attributes: ['popularityrank', 'popularity']
     }],
