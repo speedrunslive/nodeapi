@@ -16,8 +16,7 @@ module.exports = {
         allowNull: false,
         references: {
           model: 'Seasons',
-          key: 'id',
-          name: 'raceSeasonId'
+          key: 'id'
         },
         onUpdate: 'CASCADE',
         type: sequelize.INTEGER.UNSIGNED
@@ -26,8 +25,7 @@ module.exports = {
         allowNull: false,
         references: {
           model: 'Games',
-          key: 'id',
-          name: 'raceGameId'
+          key: 'id'
         },
         onUpdate: 'CASCADE',
         type: sequelize.INTEGER.UNSIGNED
@@ -36,8 +34,7 @@ module.exports = {
         allowNull: false,
         references: {
           model: 'Goals',
-          key: 'id',
-          name: 'raceGoalId'
+          key: 'id'
         },
         onUpdate: 'CASCADE',
         type: sequelize.INTEGER.UNSIGNED

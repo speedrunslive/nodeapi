@@ -71,7 +71,7 @@ module.exports = function(sequelize, DataTypes) {
         Player.hasOne(models.Stream, {
           foreign_key: {
             allowNull: false,
-            name: 'player_id',
+            name: 'player_id'
           },
           as: 'stream',
           onDelete: 'CASCADE'

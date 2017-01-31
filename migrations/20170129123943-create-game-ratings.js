@@ -16,8 +16,7 @@ module.exports = {
         allowNull: false,
         references: {
           model: 'Players',
-          key: 'id',
-          name: 'gameRatingPlayerId'
+          key: 'id'
         },
         onUpdate: 'CASCADE',
         type: sequelize.INTEGER.UNSIGNED
@@ -26,8 +25,7 @@ module.exports = {
         allowNull: false,
         references: {
           model: 'Seasons',
-          key: 'id',
-          name: 'gameRatingSeasonId'
+          key: 'id'
         },
         onUpdate: 'CASCADE',
         type: sequelize.INTEGER.UNSIGNED
@@ -36,8 +34,7 @@ module.exports = {
         allowNull: false,
         references: {
           model: 'Games',
-          key: 'id',
-          name: 'gameRatingGameId'
+          key: 'id'
         },
         onUpdate: 'CASCADE',
         type: sequelize.INTEGER.UNSIGNED

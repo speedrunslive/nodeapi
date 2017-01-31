@@ -14,12 +14,16 @@ module.exports = {
       },
       game_id: {
         allowNull: false,
+        unique: true,
         references: {
           model: 'Games',
-          key: 'id',
-          name: 'gameRankingGameId'
+          key: 'id'
         },
         onUpdate: 'CASCADE',
+        type: sequelize.INTEGER.UNSIGNED
+      },
+      popularityrank: {
+        allowNull: false,
         type: sequelize.INTEGER.UNSIGNED
       },
       popularity: {
