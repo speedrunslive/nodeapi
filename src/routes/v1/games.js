@@ -15,7 +15,8 @@ function getGames(req, res, next) {
     }],
     attributes: {
       exclude: ['info']
-    }
+    },
+    order: 'popularity DESC'
   }).then(function(games) {
     // TODO: add popularity and rank to games
     res.send({

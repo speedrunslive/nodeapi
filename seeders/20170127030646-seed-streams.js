@@ -17,7 +17,7 @@ module.exports = {
       player_id: 3,
       channel: 'SunJiano',
       api: 'twitch'
-    }], {});
+    }]);
   },
   down: function(queryInterface, sequelize) {
     return queryInterface.bulkDelete('Streams', null, {});

@@ -22,7 +22,7 @@ module.exports = {
       twitter: 'Jiano',
       youtube: 'SunJiano',
       country: 212,
-    }], {});
+    }]);
   },
   down: function(queryInterface, sequelize) {
     return queryInterface.bulkDelete('Players', null, {});

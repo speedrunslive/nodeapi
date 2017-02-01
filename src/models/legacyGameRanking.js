@@ -18,6 +18,7 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       },
       onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
       type: DataTypes.INTEGER.UNSIGNED
     },
     popularityrank: {
