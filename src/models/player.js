@@ -74,7 +74,7 @@ module.exports = function(sequelize, DataTypes) {
             name: 'player_id'
           },
           as: 'stream',
-          onDelete: 'CASCADE'
+          onUpdate: 'CASCADE'
         });
       }
     }

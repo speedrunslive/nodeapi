@@ -87,7 +87,7 @@ module.exports = function(sequelize, DataTypes) {
             name: 'player_id'
           },
           as: 'player',
-          onDelete: 'CASCADE'
+          onUpdate: 'CASCADE'
         });
       },
       API: constants.STREAM_API

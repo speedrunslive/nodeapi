@@ -16,6 +16,7 @@ module.exports = {
           key: 'id'
         },
         onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
         type: sequelize.INTEGER.UNSIGNED
       },
       name: {

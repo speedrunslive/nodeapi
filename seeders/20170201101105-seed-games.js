@@ -40,6 +40,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, sequelize) {
-    return queryInterface.bulkDelete('Games', null, {});
+    return queryInterface.bulkDelete('Games');
   }
 };

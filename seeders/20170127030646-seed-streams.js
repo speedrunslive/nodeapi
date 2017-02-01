@@ -20,6 +20,6 @@ module.exports = {
     }]);
   },
   down: function(queryInterface, sequelize) {
-    return queryInterface.bulkDelete('Streams', null, {});
+    return queryInterface.bulkDelete('Streams');
   }
 };

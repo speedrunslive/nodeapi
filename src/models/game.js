@@ -49,6 +49,7 @@ module.exports = function(sequelize, DataTypes) {
             name: 'game_id'
           },
           as: 'ranking',
+          onUpdate: 'CASCADE',
           onDelete: 'CASCADE'
         });
       }

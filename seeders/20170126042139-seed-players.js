@@ -25,6 +25,6 @@ module.exports = {
     }]);
   },
   down: function(queryInterface, sequelize) {
-    return queryInterface.bulkDelete('Players', null, {});
+    return queryInterface.bulkDelete('Players');
   }
 };

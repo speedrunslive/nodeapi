@@ -40,6 +40,7 @@ module.exports = function(sequelize, DataTypes) {
             name: 'game_id'
           },
           as: 'game',
+          onUpdate: 'CASCADE',
           onDelete: 'CASCADE'
         });
       }
