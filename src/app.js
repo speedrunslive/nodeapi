@@ -6,7 +6,7 @@
 var restify = require('restify');
 var passport = require('passport-restify');
 var sessions = require('client-sessions');
-var formatPrettyJSON = require('./formatters/prettyjson');
+var formatPrettyJSON = require('./utils/prettyjson');
 
 var port = process.env.PORT || 3000,
   server = restify.createServer({
