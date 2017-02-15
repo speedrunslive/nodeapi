@@ -44,6 +44,7 @@ server.get({
 
 require('./auth/oauth')(server);
 require('./auth/login')(server);
+require('./routes/v2/games')(server);
 require('./routes/v1/players')(server);
 require('./routes/v1/streams')(server);
 require('./routes/v1/games')(server);
