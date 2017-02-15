@@ -34,7 +34,7 @@ function getStreamByName(req, res, next) {
         message: 'No player with name ' + req.params.name
       }));
     } else {
-      res.send(stream.v1JSON());
+      res.send(stream.toV1JSON());
     }
   });
 }
@@ -62,7 +62,7 @@ function putStreamByName(req, res, next) {
       stream.save({
         fields: ['channel']
       }).then(function(results) {
-        res.send(results.v1JSON());
+        res.send(results.toV1JSON());
       }).catch(function(error) {
         res.send(error); // CLEANUP: add real error
       });

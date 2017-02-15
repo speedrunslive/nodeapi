@@ -26,4 +26,4 @@ function formatPrettyJSON(req, res, body, cb) {
   return cb(null, data);
 }
 
-module.exports = formatPrettyJSON;
+module.exports.prettyJSON = formatPrettyJSON;

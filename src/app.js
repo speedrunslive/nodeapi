@@ -6,14 +6,14 @@
 var restify = require('restify');
 var passport = require('passport-restify');
 var sessions = require('client-sessions');
-var formatPrettyJSON = require('./utils/prettyjson');
+var formatters = require('./utils/formatters');
 
 var port = process.env.PORT || 3000,
   server = restify.createServer({
     name: 'SpeedRunsLive',
     version: '0.0.0',
     formatters: {
-      'application/json': formatPrettyJSON
+      'application/json': formatters.prettyJSON
     }
   });
 server.use(restify.acceptParser(server.acceptable));

@@ -29,7 +29,7 @@ module.exports = function(sequelize, DataTypes) {
     underscored: true,
     timestamps: false,
     instanceMethods: {
-      toJSON: function() {
+      toV1JSON: function() {
         var values = Object.assign({}, this.get());
         values.abbrev = values.short;
         if (values.ranking) {

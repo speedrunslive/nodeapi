@@ -21,7 +21,9 @@ function getGames(req, res, next) {
     // TODO: add popularity and rank to games
     res.send({
       count: games.length.toString(),
-      games: games
+      games: games.map(function stringify(game) {
+        return game.toV1JSON();
+      })
     });
   });
 }

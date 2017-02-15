@@ -51,7 +51,7 @@ module.exports = function(sequelize, DataTypes) {
     underscored: true,
     timestamps: false,
     instanceMethods: {
-      toJSON: function() {
+      toV1JSON: function() {
         var values = Object.assign({}, this.get());
         if (!values.stream) {
           values.api = '';

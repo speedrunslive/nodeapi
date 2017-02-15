@@ -32,7 +32,7 @@ function getPlayerByName(req, res, next) {
         message: 'No player with name ' + req.params.name
       }));
     } else {
-      res.send(player);
+      res.send(player.toV1JSON());
     }
   });
 }
@@ -48,7 +48,7 @@ function putPlayerByName(req, res, next) {
       player.save({
         fields: ['name']
       }).then(function(results) {
-        res.send(player);
+        res.send(player.toV1JSON());
       }).catch(function(error) {
         res.send(error); // CLEANUP: add real error
       });
@@ -60,7 +60,7 @@ function registerRoutes(server) {
   server.get({
     path: '/players/:name',
     version: '1.0.0 '
-  }, function(req, res, next) {
+  }, function validateGetByName(req, res, next) {
     if (!validator.isLength(req.params.name, {
         min: 1,
         max: 50
@@ -75,7 +75,7 @@ function registerRoutes(server) {
   server.put({
     path: '/players/:name',
     version: '1.0.0'
-  }, function(req, res, next) {
+  }, function validatePutByName(req, res, next) {
     if (!validator.isLength(req.params.name, {
         min: 1,
         max: 50
