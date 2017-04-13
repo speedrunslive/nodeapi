@@ -42,7 +42,7 @@ module.exports = function(sequelize, DataTypes) {
           values.popularityrank = values.ranking.popularityrank;
           delete values.ranking;
         }
-        delete values.abbrev;
+        delete values.short;
         return values;
       }
     },
